@@ -1,2 +1,4 @@
+# General Model
 django >3.2,<3.3
 python-decouple
+pillow

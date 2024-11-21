@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User
+from .models import User , Profile
+from blog.models import Post, Category
+from comment.models import Comment_Like, Comments
 # Register your models here.
 
 
@@ -60,4 +62,9 @@ class AdminCustom(UserAdmin):
     )
 
 
+admin.site.register(Comments)
+admin.site.register(Comment_Like)
+admin.site.register(Category)
+admin.site.register(Post)
+admin.site.register(Profile)
 admin.site.register(User, AdminCustom)
