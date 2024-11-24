@@ -6,6 +6,9 @@
     },
     "cSpell.words": [
         "djangorestframework",
-        "simplejwt"
+        "restframework",
+        "restframework.generic",
+        "simplejwt",
+        "viewsets"
     ]
 }
