@@ -9,7 +9,7 @@ class Post(models.Model):
     owner = models.ForeignKey("accounts.Profile" , on_delete=models.CASCADE)
     image= models.ImageField(upload_to='post_image/' , null=True , blank=True   )
     title = models.CharField(max_length=20)
-    content = models.CharField(max_length=20)
+    content = models.CharField(max_length=200)
     status= models.BooleanField(default=False)
     category = models.ForeignKey("Category" , on_delete=models.CASCADE)
 
