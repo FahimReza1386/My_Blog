@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Blog Home - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    </head>
+    <body style="font-family: Vazir,sans-serif;" dir="rtl">
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" dir="rtl">
+            <div class="container">
+                <a class="navbar-brand" href="#!">وبلاگ های فهیم رضا</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="margin: 0 10rem;">
+                        <li class="nav-item"><a class="nav-link active" style="--bs-navbar-nav-link-padding-x: 1.5rem;" href="#">خانه</a></li>
+                        <li class="nav-item"><a class="nav-link" style="--bs-navbar-nav-link-padding-x: 1.5rem;" href="#!">درباره من</a></li>
+                        <li class="nav-item"><a class="nav-link" style="--bs-navbar-nav-link-padding-x: 1.5rem;" href="#!">مخاطبین</a></li>
+                        <li class="nav-item"><a class="nav-link" style="--bs-navbar-nav-link-padding-x: 1.5rem;" aria-current="page" href="#">وبلاگ ها</a></li>
+                        <li class="nav-item"><a class="nav-link" style="--bs-navbar-nav-link-padding-x: 1.5rem;" aria-current="page" href="/accounts/login/">ورود</a></li>
+                        <li class="nav-item"><a class="nav-link" style="--bs-navbar-nav-link-padding-x: 1.5rem;" aria-current="page" href="#">ثبت نام</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <header class="py-5 bg-light border-bottom mb-4">
+            <div class="container">
+                <div class="text-center my-5">
+                    <h1 class="fw-bolder">خوشحالم که قصد ایجاد یک وبلاگ رو دارید .</h1>
+                </div>
+            </div>
+        </header>
+
+           <form action="{% url 'CreatePost' %}" method="POST" enctype="multipart/form-data" style="width: 80% !important;margin: 2rem auto;box-shadow: 0px 0px 6px 0px black;border-radius: 10px;padding: 20px;height: 33rem;background-color: antiquewhite;">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" style="    width: 10%;padding: 10px;border: none;border-radius: 5px;float: left;margin: 2rem;color: green;font-size: 15px;font-weight: bold;box-shadow: 0px 2px 3px 0px black;">ارسال وبلاگ</button>
+           </form>
+
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">تمامی حقوق این وبلاگ ها متعلق به فهیم رضا حسینی است.</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{% static 'js/scripts.js' %}"></script>
+    </body>
+</html>
