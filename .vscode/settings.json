@@ -9,6 +9,7 @@
         "restframework",
         "restframework.generic",
         "simplejwt",
+        "Vazir",
         "viewsets"
     ]
 }
