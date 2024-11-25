@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixi
 from .models import Post, Category
 from accounts.models import Profile
 from .forms import CreatePostForm
+from comment.models import Comment_Like, Comments
 
 # Create your views here.
 
@@ -40,6 +41,8 @@ class DetailsPost(DetailView):
         self.object=self.get_object()
         context = self.get_context_data(object=self.object)
         context['posts']=Post.objects.filter(id=self.object.id)
+        context['comments']=Comments.objects.filter(post=self.object.id)
+        print(context['comments'])
         return self.render_to_response(context)
 
     

@@ -7,7 +7,12 @@ User = get_user_model()
 class Comments(models.Model):
     user = models.ForeignKey("accounts.Profile" , on_delete=models.CASCADE)
     text = models.CharField(max_length=300)
-    comment = models.ForeignKey('blog.Post' , on_delete=models.CASCADE , null=True)
+    post = models.ForeignKey('blog.Post' , on_delete=models.CASCADE , null=True)
+    star = models.IntegerField(default=0)
+
+    created_date = models.DateTimeField(auto_now_add=True , null=True)
+    updated_date = models.DateTimeField(auto_now=True , null=True)
+    
     def like_count(self):
         return self.comment_liked.count()
 

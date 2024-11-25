@@ -22,6 +22,89 @@
     </div>
     {% endfor %}
 
+
 </div>
+
+<section dir="rtl">
+    <div class="container my-5 py-5">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-12 col-lg-10">
+          <div class="card text-body">
+            {% for comment in comments %}
+            <div class="card-body p-4" style="box-shadow: 0 0 3px 0 black;margin: 1rem;">
+
+              <div class="d-flex flex-start">
+                <img class="rounded-circle shadow-1-strong me-3"
+                  src="{{ comment.user.image }}" alt="avatar" width="60"
+                  height="60" style="margin: 0.5rem;"/>
+                <div>
+                  <h6 class="fw-bold mb-1">{{ comment.user.first_name }}</h6>
+                  <div class="d-flex align-items-center mb-3">
+                    <p class="mb-0">
+                      {{ comment.created_date }}
+                    </p>
+                  </div>
+                  <p class="mb-0">
+                    {{ comment.text }}
+                  </p>
+                </div>
+              </div>
+            <i class='bx bxs-like' style="float: left;font-size: 30px;cursor: pointer;"></i>
+            </div>
+            {% endfor %}
+            <hr class="my-0" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container my-5 py-5 text-body" >
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-6">
+          <div class="card">
+            <div class="card-body p-4"  style="box-shadow: 0 0 3px 0 black;">
+              <div class="d-flex flex-start w-100">
+                <img class="rounded-circle shadow-1-strong me-3"
+                  src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp" alt="avatar" width="65"
+                  height="65" />
+                <div class="w-100">
+                  <h5>Add a comment</h5>
+                  <ul data-mdb-rating-init class="rating mb-3" data-mdb-toggle="rating">
+                    <li>
+                      <i class="far fa-star fa-sm text-danger" title="Bad"></i>
+                    </li>
+                    <li>
+                      <i class="far fa-star fa-sm text-danger" title="Poor"></i>
+                    </li>
+                    <li>
+                      <i class="far fa-star fa-sm text-danger" title="OK"></i>
+                    </li>
+                    <li>
+                      <i class="far fa-star fa-sm text-danger" title="Good"></i>
+                    </li>
+                    <li>
+                      <i class="far fa-star fa-sm text-danger" title="Excellent"></i>
+                    </li>
+                  </ul>
+                  <div data-mdb-input-init class="form-outline">
+                    <textarea class="form-control" id="textAreaExample" rows="4"></textarea>
+                    <label class="form-label" for="textAreaExample">What is your view?</label>
+                  </div>
+                  <div class="d-flex justify-content-between mt-3">
+                    <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-success">Danger</button>
+                    <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger">
+                      Send <i class="fas fa-long-arrow-alt-right ms-1"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 {% endblock %}
