@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
-from django.views.generic import CreateView,UpdateView,DeleteView
+from django.views.generic import CreateView,UpdateView,DeleteView , DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin
 from .models import Post, Category
 from accounts.models import Profile
@@ -29,4 +29,17 @@ class CreatePost(LoginRequiredMixin,CreateView):
         prf = Profile.objects.get(user=self.request.user)
         form.instance.owner = prf
         return super().form_valid(form)
+    
+
+
+class DetailsPost(DetailView):
+    template_name = 'Blog/post_detail.html'
+    model = Post
+
+    def get(self, request, *args, **kwargs):
+        self.object=self.get_object()
+        context = self.get_context_data(object=self.object)
+        context['posts']=Post.objects.filter(id=self.object.id)
+        return self.render_to_response(context)
+
     
