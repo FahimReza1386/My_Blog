@@ -14,11 +14,11 @@ class Comments(models.Model):
     updated_date = models.DateTimeField(auto_now=True , null=True)
     
     def like_count(self):
-        return self.comment_liked.count()
+        return self.liked.count()
 
 
 class Comment_Like(models.Model):
-    comment = models.ForeignKey(Comments, related_name='comment_liked', on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comments, related_name='liked', on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
