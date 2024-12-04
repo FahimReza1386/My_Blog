@@ -15,7 +15,6 @@
             <a class="btn btn-primary" href="/">بازگشت به خانه→</a>
         </div>
     </div>
-    {% endfor %}
 </div>
 
 <section dir="rtl">
@@ -37,9 +36,14 @@
                   <p class="mb-0">{{ comment.text }}</p>
                 </div>
               </div>
+
               <!-- لایک کامنت -->
             <div style="width: 2%;height: auto;margin: 0 auto;"> <i class='bx bxs-like like-icon' style="float: left;font-size: 30px;cursor: pointer;" data-id="{{ comment.id }}"></i>
-                <h6>{{ comment.liked.count }}</h6></div>
+                <h6>{{ comment.liked.count }}</h6>
+                <span class="star-add" style="font-size: 30px;color: yellow;transition: color 0.2s;margin-right: -8px;">&#9733;</span>
+
+                {{ comment.star }}
+  </div>
             </div>
             {% endfor %}
             <hr class="my-0" />
@@ -49,13 +53,57 @@
     </div>
 </section>
 
+<section  dir="rtl">
+  <div class="container my-5 py-5 text-body">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-6">
+        <div class="card">
+          <div class="card-body p-4">
+            <div class="d-flex flex-start w-100">
+              <img class="rounded-circle shadow-1-strong me-3"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF5-3YjBcXTqKUlOAeUUtuOLKgQSma2wGG1g&s" alt="avatar" width="65"
+                height="65" />
+              <div class="w-100">
+                <h5 style="margin-right: 20px;">نظر شما چیست ؟</h5>
+                  <form method="POST"  action="{% url 'AddComment' pk=post.id %}">
+                    {% csrf_token %}
+                  <div id="star-rating">
+                    <span class="star-add" data-value="1">&#9733;</span>
+                    <span class="star-add" data-value="2">&#9733;</span>
+                    <span class="star-add" data-value="3">&#9733;</span>
+                    <span class="star-add" data-value="4">&#9733;</span>
+                    <span class="star-add" data-value="5">&#9733;</span>
+                </div>
+                <input type="hidden" id="rating" name="star" value="0">
+                <div data-mdb-input-init class="form-outline">
+                  <textarea class="form-control" id="textAreaExample" name="comment" rows="4"></textarea>
+                </div>
+                <div class="d-flex justify-content-between mt-3">
+                  <button  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger">
+                    ارسال
+                  </button>
+                </div>
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  
+</section>
+
 
 
 {% endblock %}
 {% block js %}
 <script src="{% static 'js/jquery.js' %}"></script>
+
 <script>
-$(document).ready(function() {
+  $(document).ready(function() {
     var userId = '{{ user.id }}';  // شناسه کاربر
 
     // دریافت وضعیت لایک‌ها
@@ -92,13 +140,51 @@ $(document).ready(function() {
                 } else {
                     $(this).css('color', 'black');
                 }
-                location.reload()
+                location.reload();
             },
             error: function(err) {
                 console.log(err);
             }
         });
     });
+
+    // مدیریت ستاره‌ها برای هر کامنت
+    $('.star-add').each(function() {
+        var stars = $(this).closest('.card').find('.star-add');  // پیدا کردن ستاره‌ها برای هر کامنت
+        const ratingInput = $(this).closest('form').find('input[name="star"]');  // پیدا کردن ورودی ستاره برای این فرم
+
+        // تنظیم رنگ ستاره‌ها وقتی موس روی آن‌ها می‌رود
+        $(this).on('mouseover', function() {
+            const value = $(this).data('value');
+            stars.each(function(index) {
+                if (index < value) {
+                    $(this).addClass('hover');
+                } else {
+                    $(this).removeClass('hover');
+                }
+            });
+        });
+
+        // برگرداندن رنگ‌ها بعد از موس
+        $(this).on('mouseout', function() {
+            stars.removeClass('hover');
+        });
+
+        // مدیریت انتخاب ستاره
+        $(this).on('click', function() {
+            const value = $(this).data('value');
+            ratingInput.val(value);  // ستاره انتخاب شده را در ورودی قرار می‌دهیم
+
+            // تنظیم کلاس selected برای ستاره‌های انتخاب شده
+            stars.removeClass('selected');  // ابتدا تمام ستاره‌ها را از حالت انتخاب شده خارج می‌کنیم
+            stars.each(function(index) {
+                if (index < value) {
+                    $(this).addClass('selected');  // ستاره‌های انتخاب شده را رنگی می‌کنیم
+                }
+            });
+        });
+    });
 });
+
 </script>
 {% endblock %}

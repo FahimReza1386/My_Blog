@@ -25,8 +25,12 @@
                         <li class="nav-item"><a class="nav-link" style="--bs-navbar-nav-link-padding-x: 1.5rem;" href="https://fahimreza.ir">درباره من</a></li>
                         <li class="nav-item"><a class="nav-link" style="--bs-navbar-nav-link-padding-x: 1.5rem;" href="#!">مخاطبین</a></li>
                         <li class="nav-item"><a class="nav-link" style="--bs-navbar-nav-link-padding-x: 1.5rem;" aria-current="page" href="{% url 'CreatePost' %}">وبلاگ ها</a></li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" style="--bs-navbar-nav-link-padding-x: 1.5rem;" aria-current="page" href="/accounts/logout/">خروج</a></li>
+                        {% else %}
                         <li class="nav-item"><a class="nav-link" style="--bs-navbar-nav-link-padding-x: 1.5rem;" aria-current="page" href="/accounts/login/">ورود</a></li>
                         <li class="nav-item"><a class="nav-link" style="--bs-navbar-nav-link-padding-x: 1.5rem;" aria-current="page" href="#">ثبت نام</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>

@@ -1,14 +1,16 @@
-from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import JsonResponse , HttpResponse
+from django.urls import reverse
 from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic import CreateView,UpdateView,DeleteView , DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin
 from .models import Post, Category
 from accounts.models import Profile
-from .forms import CreatePostForm
+from .forms import *
 from comment.models import Comment_Like, Comments
 from django.contrib.auth import get_user_model
+from django.contrib import messages
 
 User = get_user_model()
 
@@ -76,3 +78,35 @@ class LikeComments(View):
                 return JsonResponse({'isLiked': False})
         else:
             return JsonResponse({'error': 'Invalid request'}, status=400)
+
+
+
+class AddComment(View):
+    def post(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            post = get_object_or_404(Post, id=kwargs['pk'])
+
+            # دریافت متن کامنت و ستاره از POST
+            comment_text = request.POST['comment']
+            star = request.POST['star'] 
+
+            if comment_text and star:
+                try:
+                    star = int(star)
+                    prf = Profile.objects.get(user=request.user)
+                    Comments.objects.create(
+                        user=prf,
+                        text=comment_text,
+                        post=post,
+                        star=star
+                    )
+                    messages.success(request , 'کامنت شما با موفقیت اضافه شد ...')
+                    return redirect(f"/details_post/{kwargs['pk']}/")
+                except ValueError:
+                    return JsonResponse({'error': 'Invalid star value'}, status=400)
+            else:
+                return JsonResponse({'error': 'Comment text and star are required'}, status=400)
+
+        else:
+            return JsonResponse({'error': 'User is not authenticated'}, status=401)
+        

@@ -23,6 +23,25 @@ body{
   font-family: 'Vazir' , sans-serif;
 }
 
+
+#star-rating .star-add {
+  font-size: 30px;
+  cursor: pointer;
+  color: gray;
+  transition: color 0.2s;
+}
+#star-rating .star-add.selected {
+  color: gold;
+}
+#star-rating{
+  width: 15%;
+  margin: 0 auto;
+}
+#star-rating .star-add:hover,
+#star-rating .star-add:hover ~ .star-add {
+  color: lightgray; /* رنگ ستاره‌ها هنگام هاور */
+}
+
 .a-cat:hover{
   text-decoration: underline;
 }
