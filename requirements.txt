@@ -4,3 +4,7 @@ python-decouple
 pillow
 djangorestframework-simplejwt
 djangorestframework
+
+# Date Time Module
+jdatetime
+jalali_core

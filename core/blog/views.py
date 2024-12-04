@@ -11,6 +11,7 @@ from .forms import *
 from comment.models import Comment_Like, Comments
 from django.contrib.auth import get_user_model
 from django.contrib import messages
+import jdatetime
 
 User = get_user_model()
 
@@ -49,8 +50,18 @@ class DetailsPost(DetailView):
         context = self.get_context_data(object=self.object)
         context['posts']=Post.objects.filter(id=self.object.id)
         context['comments']=Comments.objects.filter(post=self.object.id)
-        print(context['comments'])
+        for post in context["posts"]:
+            g_date = post.published_date  # تاریخ میلادی از نمونه
+            j_date = jdatetime.datetime.fromgregorian(datetime=g_date)  # تبدیل به تاریخ شمسی
+        for comment in context['comments']:
+            k_date = comment.created_date
+            l_date = jdatetime.datetime.fromgregorian(datetime=k_date)
+        formatted_date = f"{j_date.year}/{j_date.month}/{j_date.day}"
+        formatted_date2 = f"{l_date.year}/{l_date.month}/{l_date.day}"
+        context['post_published_date']=formatted_date
+        context['comment_created_date']=formatted_date2
         return self.render_to_response(context)
+    
     
 class CheckLikePost(View):
     def get(self, request):
@@ -110,3 +121,5 @@ class AddComment(View):
         else:
             return JsonResponse({'error': 'User is not authenticated'}, status=401)
         
+
+    
