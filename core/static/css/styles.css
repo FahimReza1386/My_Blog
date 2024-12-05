@@ -34,13 +34,14 @@ body{
   color: gold;
 }
 #star-rating{
-  width: 15%;
+  width: 35%;
   margin: 0 auto;
 }
 #star-rating .star-add:hover,
 #star-rating .star-add:hover ~ .star-add {
-  color: lightgray; /* رنگ ستاره‌ها هنگام هاور */
+  color: yellow; /* رنگ ستاره‌ها هنگام هاور */
 }
+
 
 .a-cat:hover{
   text-decoration: underline;
@@ -4310,6 +4311,7 @@ textarea.form-control-lg {
 .card-img-top,
 .card-img-bottom {
   width: 100%;
+  max-height: 300px;
 }
 
 .card-img,

@@ -9,6 +9,7 @@
         "fromgregorian",
         "jalali",
         "jdatetime",
+        "jquery",
         "restframework",
         "restframework.generic",
         "simplejwt",

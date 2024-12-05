@@ -26,6 +26,11 @@ class IndexPage(TemplateView):
         category=Category.objects.all()
         context["posts"] = post
         context["categories"] = category
+        for post in context["posts"]:
+            g_date = post.published_date  # تاریخ میلادی از نمونه
+            j_date = jdatetime.datetime.fromgregorian(datetime=g_date)
+        formatted_date = f"{j_date.year}/{j_date.month}/{j_date.day}"
+        context['post_published_date']=formatted_date
         return context
     
 class CreatePost(LoginRequiredMixin,CreateView):
@@ -38,7 +43,7 @@ class CreatePost(LoginRequiredMixin,CreateView):
         prf = Profile.objects.get(user=self.request.user)
         form.instance.owner = prf
         return super().form_valid(form)
-    
+
 
 
 class DetailsPost(DetailView):
@@ -52,14 +57,18 @@ class DetailsPost(DetailView):
         context['comments']=Comments.objects.filter(post=self.object.id)
         for post in context["posts"]:
             g_date = post.published_date  # تاریخ میلادی از نمونه
-            j_date = jdatetime.datetime.fromgregorian(datetime=g_date)  # تبدیل به تاریخ شمسی
-        for comment in context['comments']:
-            k_date = comment.created_date
-            l_date = jdatetime.datetime.fromgregorian(datetime=k_date)
+            j_date = jdatetime.datetime.fromgregorian(datetime=g_date)
         formatted_date = f"{j_date.year}/{j_date.month}/{j_date.day}"
-        formatted_date2 = f"{l_date.year}/{l_date.month}/{l_date.day}"
         context['post_published_date']=formatted_date
-        context['comment_created_date']=formatted_date2
+
+        for comment in context['comments']:
+            if comment:
+                k_date = comment.created_date
+                l_date = jdatetime.datetime.fromgregorian(datetime=k_date)
+            else:
+                pass
+            formatted_date2 = f"{l_date.year}/{l_date.month}/{l_date.day}"
+            context['comment_created_date']=formatted_date2
         context['prf']=get_object_or_404(Profile ,user=request.user)
         return self.render_to_response(context)
     

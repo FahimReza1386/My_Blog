@@ -24,7 +24,7 @@
                         <li class="nav-item"><a class="nav-link active" style="--bs-navbar-nav-link-padding-x: 1.5rem;" href="/">خانه</a></li>
                         <li class="nav-item"><a class="nav-link" style="--bs-navbar-nav-link-padding-x: 1.5rem;" href="https://fahimreza.ir">درباره من</a></li>
                         <li class="nav-item"><a class="nav-link" style="--bs-navbar-nav-link-padding-x: 1.5rem;" href="#!">مخاطبین</a></li>
-                        <li class="nav-item"><a class="nav-link" style="--bs-navbar-nav-link-padding-x: 1.5rem;" aria-current="page" href="{% url 'CreatePost' %}">وبلاگ ها</a></li>
+                        <li class="nav-item"><a class="nav-link" style="--bs-navbar-nav-link-padding-x: 1.5rem;" aria-current="page" href="{% url 'CreatePost' %}">ایجاد بلاگ</a></li>
                         {% if user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" style="--bs-navbar-nav-link-padding-x: 1.5rem;" aria-current="page" href="/accounts/logout/">خروج</a></li>
                         {% else %}
@@ -62,7 +62,7 @@
                             <div class="card mb-4">
                                 <a href="#!"><img class="card-img-top" src="{{ post.image.url }}" alt="..." /></a>
                                 <div class="card-body">
-                                    <div class="small text-muted">{{ post.published_date }}</div>
+                                    <div class="small text-muted">{{ post_published_date }}</div>
                                     <h2 class="card-title h4">{{ post.title }}</h2>
                                     <p class="card-text">{{ post.content }}</p>
                                     <a class="btn btn-primary" href="{% url 'DetailsPost' pk=post.id %}">ادامه مطلب →</a>
