@@ -4,6 +4,7 @@ from django.urls import path,include
 urlpatterns =[
     path('' , views.IndexPage.as_view() , name="IndexPage"),
     path('create_post/' , views.CreatePost.as_view() , name="CreatePost"),
+    path('delete_post/<int:pk>/' , views.DeletePost.as_view() , name="DeletePost"),
     path('my_blogs/' , views.MyBlogs.as_view() , name="MyBlogs"),
     path('details_post/<int:pk>/' , views.DetailsPost.as_view() , name="DetailsPost"),
     path('checkLike_post/', views.CheckLikePost.as_view(), name='CheckLikePost'),

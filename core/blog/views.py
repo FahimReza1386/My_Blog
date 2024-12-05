@@ -42,12 +42,15 @@ class MyBlogs(TemplateView):
         post=Post.objects.filter(owner=prf)
         context['posts']=post
         for post in context["posts"]:
-            g_date = post.published_date  # تاریخ میلادی از نمونه
-            j_date = jdatetime.datetime.fromgregorian(datetime=g_date)
-        formatted_date = f"{j_date.year}/{j_date.month}/{j_date.day}"
+            if post:
+                g_date = post.published_date  # تاریخ میلادی از نمونه
+                j_date = jdatetime.datetime.fromgregorian(datetime=g_date)
+            else:
+                pass
+            formatted_date = f"{j_date.year}/{j_date.month}/{j_date.day}"
+            context['post_published_date']=formatted_date
         category=Category.objects.all()
         context["categories"] = category
-        context['post_published_date']=formatted_date
         return context
 
 
@@ -63,6 +66,11 @@ class CreatePost(LoginRequiredMixin,CreateView):
         form.instance.owner = prf
         return super().form_valid(form)
 
+class DeletePost(LoginRequiredMixin,View):
+    def get(self,request,*args,**kwargs):
+        post=Post.objects.get(id=kwargs['pk'])
+        post.delete()
+        return redirect('/my_blogs/')
 
 
 class DetailsPost(DetailView):
@@ -75,10 +83,13 @@ class DetailsPost(DetailView):
         context['posts']=Post.objects.filter(id=self.object.id)
         context['comments']=Comments.objects.filter(post=self.object.id)
         for post in context["posts"]:
-            g_date = post.published_date  # تاریخ میلادی از نمونه
-            j_date = jdatetime.datetime.fromgregorian(datetime=g_date)
-        formatted_date = f"{j_date.year}/{j_date.month}/{j_date.day}"
-        context['post_published_date']=formatted_date
+            if post:
+                g_date = post.published_date
+                j_date = jdatetime.datetime.fromgregorian(datetime=g_date)
+            else:
+                pass
+            formatted_date = f"{j_date.year}/{j_date.month}/{j_date.day}"
+            context['post_published_date']=formatted_date
 
         for comment in context['comments']:
             if comment:

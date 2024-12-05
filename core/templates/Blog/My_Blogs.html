@@ -33,6 +33,8 @@
                                         <h2 class="card-title h4">{{ post.title }}</h2>
                                         <p class="card-text">{{ post.content }}</p>
                                         <a class="btn btn-primary" href="{% url 'DetailsPost' pk=post.id %}">ادامه مطلب →</a>
+                                        <a href="{% url 'DeletePost' pk=post.id %}"><i class="fa-solid fa-trash" style="color: red;cursor: pointer;float: left;font-size: 20px;"></i></a>
+
                                     </div>
                                 </div>
     
