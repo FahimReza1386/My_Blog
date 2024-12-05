@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block headers %}
+
+    <header class="py-5 bg-light border-bottom mb-4">
+        <div class="container">
+            <div class="text-center my-5">
+                <h1 class="fw-bolder">این صفحه وبلاگ های شماست ..</h1>
+                <a class="nav-link" style="--bs-navbar-nav-link-padding-x: 1.5rem;color: rgb(27, 202, 173);text-decoration: underline;" aria-current="page" href="{% url 'CreatePost' %}">ایجاد بلاگ</a>
+
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+            <!-- Page content-->
+            <div class="container" dir="ltr">
+                <div class="row">
+                    <!-- Blog entries-->
+                    <div class="col-lg-8">
+                        <!-- Featured blog post-->
+    
+                        <!-- Nested row for non-featured blog posts-->
+                        <div class="row col-lg-12">
+                            {% for post in posts %}
+                            <div class="col-lg-6" dir="rtl">
+                                <!-- Blog post-->
+                                <div class="card mb-4">
+                                    <a href="#!"><img class="card-img-top" src="{{ post.image.url }}" alt="..." /></a>
+                                    <div class="card-body">
+                                        <div class="small text-muted">{{ post_published_date }}</div>
+                                        <h2 class="card-title h4">{{ post.title }}</h2>
+                                        <p class="card-text">{{ post.content }}</p>
+                                        <a class="btn btn-primary" href="{% url 'DetailsPost' pk=post.id %}">ادامه مطلب →</a>
+                                    </div>
+                                </div>
+    
+                            </div>
+                            {% endfor %}
+    
+                        </div>
+                        <!-- Pagination-->
+                        <nav aria-label="Pagination" style="float: right;">
+                            <hr class="my-0" />
+                            <ul class="pagination justify-content-center my-4">
+                                <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">کمتر</a></li>
+                                <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#!">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#!">3</a></li>
+                                <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
+                                <li class="page-item"><a class="page-link" href="#!">15</a></li>
+                                <li class="page-item"><a class="page-link" href="#!">بیشتر</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- Side widgets-->
+                    <div class="col-lg-4" style="float: right;">
+                        <!-- Search widget-->
+                        <div class="card mb-4" dir="rtl">
+                            <div class="card-header">جستجو ..</div>
+                            <div class="card-body">
+                                <div class="input-group">
+                                    <input class="form-control" type="text" placeholder="مطلب مورد نظر خود را جستجو کنید .." aria-label="Enter search term..." style="border-radius: 0 !important;" aria-describedby="button-search" />
+                                    <button class="btn btn-primary" id="button-search" type="button" style="border-radius: 8px 0 0px 8px;">بریم !</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Categories widget-->
+                        <div class="card mb-4" dir="rtl">
+                            <div class="card-header">دسته بندی ها ...</div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <ul class="list-unstyled mb-0">
+                                            {% for cat in categories %}
+                                            <li><a href="#!" class="a-cat" style="text-decoration: none;color: rgba(40, 46, 45, 0.925);">{{ cat.name }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Side widget-->
+                        <div class="card mb-4" dir="rtl">
+                            <div class="card-header">فیلتر بندی...</div>
+                            <div class="card-body">سس!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}

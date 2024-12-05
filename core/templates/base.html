@@ -27,7 +27,7 @@
                         <li class="nav-item"><a class="nav-link active" style="--bs-navbar-nav-link-padding-x: 1.5rem;" href="/">خانه</a></li>
                         <li class="nav-item"><a class="nav-link" style="--bs-navbar-nav-link-padding-x: 1.5rem;" href="#!">درباره من</a></li>
                         <li class="nav-item"><a class="nav-link" style="--bs-navbar-nav-link-padding-x: 1.5rem;" href="#!">مخاطبین</a></li>
-                        <li class="nav-item"><a class="nav-link" style="--bs-navbar-nav-link-padding-x: 1.5rem;" aria-current="page" href="{% url 'CreatePost' %}">وبلاگ ها</a></li>
+                        <li class="nav-item"><a class="nav-link" style="--bs-navbar-nav-link-padding-x: 1.5rem;" aria-current="page" href="{% url 'MyBlogs' %}">بلاگ های من</a></li>
                         {% if user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" style="--bs-navbar-nav-link-padding-x: 1.5rem;" aria-current="page" href="/accounts/logout/">خروج</a></li>
                         {% else %}

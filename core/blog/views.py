@@ -33,6 +33,25 @@ class IndexPage(TemplateView):
         context['post_published_date']=formatted_date
         return context
     
+class MyBlogs(TemplateView):
+    template_name='Blog/My_Blogs.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        prf=get_object_or_404(Profile , user=self.request.user)
+        post=Post.objects.filter(owner=prf)
+        context['posts']=post
+        for post in context["posts"]:
+            g_date = post.published_date  # تاریخ میلادی از نمونه
+            j_date = jdatetime.datetime.fromgregorian(datetime=g_date)
+        formatted_date = f"{j_date.year}/{j_date.month}/{j_date.day}"
+        category=Category.objects.all()
+        context["categories"] = category
+        context['post_published_date']=formatted_date
+        return context
+
+
+    
 class CreatePost(LoginRequiredMixin,CreateView):
     model = Post
     template_name = "Blog/AddPost.html"
