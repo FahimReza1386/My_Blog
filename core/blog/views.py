@@ -11,7 +11,7 @@ from .forms import *
 from comment.models import Comment_Like, Comments
 from django.contrib.auth import get_user_model
 from django.contrib import messages
-import jdatetime
+import jdatetime # type: ignore
 
 User = get_user_model()
 
@@ -60,12 +60,12 @@ class DetailsPost(DetailView):
         formatted_date2 = f"{l_date.year}/{l_date.month}/{l_date.day}"
         context['post_published_date']=formatted_date
         context['comment_created_date']=formatted_date2
+        context['prf']=get_object_or_404(Profile ,user=request.user)
         return self.render_to_response(context)
     
     
 class CheckLikePost(View):
     def get(self, request):
-        # اگر کاربر لاگین کرده باشد
         if request.user.is_authenticated:
             user = request.user
             liked_comments = Comment_Like.objects.filter(user=user).values_list('comment_id', flat=True)  # اطمینان از استفاده صحیح از نام فیلد
@@ -79,12 +79,11 @@ class LikeComments(View):
             user = User.objects.get(id=request.POST['user'])
             comment = Comments.objects.get(id=request.POST['comment'])
 
-            # بررسی اینکه آیا این کامنت قبلاً لایک شده است یا خیر
             like, created = Comment_Like.objects.get_or_create(user=user, comment=comment)
 
-            if created:  # اگر لایک جدید ایجاد شد
+            if created: 
                 return JsonResponse({'isLiked': True})
-            else:  # اگر لایک قبلاً وجود داشت و حذف شد
+            else: 
                 like.delete()
                 return JsonResponse({'isLiked': False})
         else:
@@ -97,7 +96,6 @@ class AddComment(View):
         if request.user.is_authenticated:
             post = get_object_or_404(Post, id=kwargs['pk'])
 
-            # دریافت متن کامنت و ستاره از POST
             comment_text = request.POST['comment']
             star = request.POST['star'] 
 
@@ -122,4 +120,12 @@ class AddComment(View):
             return JsonResponse({'error': 'User is not authenticated'}, status=401)
         
 
-    
+class DeleteComment(View):
+    def get(self , request , *args , **kwargs):
+        if request.user.is_authenticated:
+            comment = get_object_or_404(Comments , id=kwargs['pk'])
+            comment.delete()
+            return redirect(f"/details_post/{comment.post.id}/")
+        else:
+            messages.error(request , "لطفا اول به حساب خود وارد شوید ...")
+            return redirect(f"/details_post/{comment.post.id}/")

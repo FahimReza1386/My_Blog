@@ -15,6 +15,9 @@ class Comments(models.Model):
     
     def like_count(self):
         return self.liked.count()
+    
+    def __str__(self):
+        return f"{self.text}"
 
 
 class Comment_Like(models.Model):

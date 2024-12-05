@@ -24,12 +24,17 @@
           <div class="card text-body">
             {% for comment in comments %}
             <div class="card-body p-4" style="box-shadow: 0 0 3px 0 black;margin: 1rem;">
+              {% if comment.user == prf %}
+              <a href="{% url 'DeleteComment' pk=comment.id %}"><i class="fa-solid fa-trash" style="color: red;cursor: pointer;float: left;font-size: 20px;"></i></a>
+              {% endif %} 
               <div class="d-flex flex-start">
+ 
                 <img class="rounded-circle shadow-1-strong me-3"
                   src="{{ comment.user.image.url }}" alt="avatar" width="60"
                   height="60" style="margin: 0.5rem;"/>
                 <div>
                   <h6 class="fw-bold mb-1">{{ comment.user.first_name }}</h6>
+               
                   <div class="d-flex align-items-center mb-3">
                     <p class="mb-0">{{ comment_created_date }}</p>
                   </div>
