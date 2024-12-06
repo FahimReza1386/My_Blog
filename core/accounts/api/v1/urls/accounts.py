@@ -6,8 +6,7 @@ urlpatterns=[
     path("registration/" , views.RegistrationApi.as_view() , name="RegistrationApi"),
 
     # Change Password
-    # path("change_password/" , views.ChangePasswordApi.as_view() , name="ChangePassword"),
-
+    path("change_password/" , views.CustomChangePasswordApi.as_view() , name="ChangePasswordApi"),
     # Activation User Api
     
     # Resent Activation
