@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block title %}
+    Post Edit Page
+{% endblock %}
+
+    {% block headers %}
+
+        <header class="py-5 bg-light border-bottom mb-4">
+            <div class="container">
+                <div class="text-center my-5">
+                    <h1 class="fw-bolder">خوشحالم که قصد توسعه بلاگ خود را دارید ..</h1>
+                </div>
+            </div>
+        </header>
+    {% endblock %}
+
+{% block content %}
+
+
+{% if messages %}
+
+    {% for message in messages %}
+        <div class="alert alert-success" style="margin:0.5rem;text-align: center;">
+            <button type="button" class="btn-close" style="float: left;margin: 0.5rem auto;" data-bs-dismiss="alert"></button>
+            <p class="text-right" style="color: black ; position: relative ; top: 5px;">{{ message }}</p>
+        </div>
+
+    {% endfor %}    
+{% endif %}
+
+<form method="POST" enctype="multipart/form-data" dir="rtl"
+    style="width: 80% !important; margin: 2rem auto;box-shadow: 0px 0px 6px 0px black;border-radius: 10px;padding: 20px;height: 33rem;background-color: antiquewhite;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit"
+        style="    width: 10%;padding: 10px;border: none;border-radius: 5px;float: left;margin: 2rem;color: green;font-size: 15px;font-weight: bold;box-shadow: 0px 2px 3px 0px black;">ارسال
+        وبلاگ</button>
+</form>
+{% endblock %}
+
+
+{% block js %}
+{% endblock %}

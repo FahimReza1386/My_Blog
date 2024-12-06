@@ -33,7 +33,9 @@
                                         <h2 class="card-title h4">{{ post.title }}</h2>
                                         <p class="card-text">{{ post.content }}</p>
                                         <a class="btn btn-primary" href="{% url 'DetailsPost' pk=post.id %}">ادامه مطلب →</a>
-                                        <a href="{% url 'DeletePost' pk=post.id %}"><i class="fa-solid fa-trash" style="color: red;cursor: pointer;float: left;font-size: 20px;"></i></a>
+                                       <i class="fa-solid fa-trash DeletePost" style="color: red;cursor: pointer;float: left;font-size: 20px;"></i>
+                                        <a href="{% url 'EditPost' pk=post.id %}"><i class="fa-regular fa-pen-to-square" class="DeletePost" style="margin:0 1rem;color: green;cursor: pointer;float: left;font-size: 20px;"></i></a>
+                                        
 
                                     </div>
                                 </div>
@@ -93,5 +95,21 @@
             </div>
 {% endblock %}
 
+
 {% block js %}
+{% for post in posts %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $('.DeletePost').on('click', function() {
+        var result = confirm('آیا از حذف خود اطمینان دارید؟');
+        console.log(result)
+        
+        if (result) {
+            window.location.href = "{% url 'DeletePost' pk=post.id %}";
+        } else {
+            console.log('cancel')
+        }
+    });
+</script>
+{% endfor %}
 {% endblock %}

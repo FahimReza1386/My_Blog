@@ -71,6 +71,13 @@ class DeletePost(LoginRequiredMixin,View):
         post=Post.objects.get(id=kwargs['pk'])
         post.delete()
         return redirect('/my_blogs/')
+    
+class EditPost(LoginRequiredMixin,UpdateView):
+    model=Post
+    template_name="Blog/EditView.html"
+    success_url='/my_blogs/'
+    form_class=EditView
+
 
 
 class DetailsPost(DetailView):
