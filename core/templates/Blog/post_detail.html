@@ -25,7 +25,7 @@
             {% for comment in comments %}
             <div class="card-body p-4" style="box-shadow: 0 0 3px 0 black;margin: 1rem;">
               {% if comment.user == prf %}
-              <a href="{% url 'DeleteComment' pk=comment.id %}"><i class="fa-solid fa-trash" style="color: red;cursor: pointer;float: left;font-size: 20px;"></i></a>
+              <i class="fa-solid fa-trash DeleteComment" data-id="{{ comment.id }}" style="color: red;cursor: pointer;float: left;font-size: 20px;"></i>
               {% endif %} 
               <div class="d-flex flex-start">
  
@@ -105,13 +105,13 @@
 
 {% endblock %}
 {% block js %}
+
 <script src="{% static 'js/jquery.js' %}"></script>
 
 <script>
   $(document).ready(function() {
-    var userId = '{{ user.id }}';  // شناسه کاربر
+    var userId = '{{ user.id }}';
 
-    // دریافت وضعیت لایک‌ها
     $.ajax({
         type: 'GET',
         url: "{% url 'CheckLikePost' %}",
@@ -126,10 +126,9 @@
         }
     });
 
-    // مدیریت کلیک روی آیکون لایک
     $('.like-icon').click(function() {
         var commentId = parseInt($(this).data('id'));
-        var userId = '{{ user.id }}';  // شناسه کاربر
+        var userId = '{{ user.id }}';
 
         $.ajax({
             type: 'POST',
@@ -153,12 +152,10 @@
         });
     });
 
-    // مدیریت ستاره‌ها برای هر کامنت
     $('.star-add').each(function() {
-        var stars = $(this).closest('.card').find('.star-add');  // پیدا کردن ستاره‌ها برای هر کامنت
-        const ratingInput = $(this).closest('form').find('input[name="star"]');  // پیدا کردن ورودی ستاره برای این فرم
+        var stars = $(this).closest('.card').find('.star-add');
+        const ratingInput = $(this).closest('form').find('input[name="star"]');
 
-        // تنظیم رنگ ستاره‌ها وقتی موس روی آن‌ها می‌رود
         $(this).on('mouseover', function() {
             const value = $(this).data('value');
             stars.each(function(index) {
@@ -170,25 +167,38 @@
             });
         });
 
-        // برگرداندن رنگ‌ها بعد از موس
         $(this).on('mouseout', function() {
             stars.removeClass('hover');
         });
 
-        // مدیریت انتخاب ستاره
         $(this).on('click', function() {
             const value = $(this).data('value');
-            ratingInput.val(value);  // ستاره انتخاب شده را در ورودی قرار می‌دهیم
+            ratingInput.val(value);
 
-            // تنظیم کلاس selected برای ستاره‌های انتخاب شده
-            stars.removeClass('selected');  // ابتدا تمام ستاره‌ها را از حالت انتخاب شده خارج می‌کنیم
+            stars.removeClass('selected');
             stars.each(function(index) {
                 if (index < value) {
-                    $(this).addClass('selected');  // ستاره‌های انتخاب شده را رنگی می‌کنیم
+                    $(this).addClass('selected');
                 }
             });
         });
     });
+});
+
+</script>
+<script>
+$('.DeleteComment').on('click', function() {
+    var result = confirm('آیا از حذف کامنت خود اطمینان دارید؟');
+    console.log(result);
+    
+    var commentId = $(this).data('id');
+    var deleteCommentUrl = "{% url 'DeleteComment' pk='0' %}";
+
+    if (result) {
+        window.location.href = deleteCommentUrl.replace('0', commentId)
+    } else {
+        console.log('cancel');
+    }
 });
 
 </script>
