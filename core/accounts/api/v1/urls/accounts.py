@@ -7,12 +7,18 @@ urlpatterns=[
 
     # Change Password
     path("change_password/" , views.CustomChangePasswordApi.as_view() , name="ChangePasswordApi"),
+    
     # Activation User Api
     
+    
     # Resent Activation
+    
     # Reset Password
+    
     # Login Token
-    # 
+    path('token/login/' , views.CustomObtainAuthToken.as_view() , name="Login-Token"),
+
+    # path('token/login/' , views.CustomObtainDiscardAuthToken.as_view() , name="Logout-Token"),
 
 
 ]

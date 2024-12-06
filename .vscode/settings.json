@@ -5,6 +5,7 @@
         "titleBar.activeForeground": "#FAFBFE"
     },
     "cSpell.words": [
+        "authtoken",
         "djangorestframework",
         "fromgregorian",
         "jalali",
@@ -14,6 +15,7 @@
         "restframework.generic",
         "simplejwt",
         "Vazir",
-        "viewsets"
+        "viewsets",
+        "yasg"
     ]
 }

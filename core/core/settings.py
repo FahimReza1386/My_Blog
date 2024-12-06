@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'blog',
     'comment',
     'rest_framework',
+    'rest_framework.authtoken',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -88,6 +90,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 
 # Password validation
@@ -146,4 +149,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # User Manager Config
 
 AUTH_USER_MODEL = "accounts.User"
-
