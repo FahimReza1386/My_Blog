@@ -8,3 +8,4 @@ djangorestframework
 # Date Time Module
 jdatetime
 jalali_core
+drf-yasg

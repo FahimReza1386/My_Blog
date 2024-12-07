@@ -1,8 +1,12 @@
 from django.contrib.auth import get_user_model
-from .serializers import RegisterSerializer, ChangePasswordSerializer
-from rest_framework import generics, status
+from .serializers import *
+from rest_framework import generics, status 
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated 
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
+from rest_framework.views import APIView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView  # type: ignore
 
 User = get_user_model()
 
@@ -46,3 +50,34 @@ class CustomChangePasswordApi(generics.GenericAPIView):
 
             return Response({'details':'password changed success .'} , status=status.HTTP_200_OK)
         return Response(serializer.error,status=status.HTTP_400_BAD_REQUEST)
+    
+
+class CustomObtainAuthToken(ObtainAuthToken):
+    serializer_class = ObtainAuthTokenSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer= self.serializer_class(data=request.data,context={'request':request})
+        serializer.is_valid(raise_exception=True)
+        user= serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({"token":token.key , "user_id":user.pk ,"email":user.email})
+
+            
+
+class CustomObtainDiscardAuthToken(APIView):
+    permission_classes=[IsAuthenticated]
+
+    def post(self, request):
+        request.user.auth_token.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+
+
+class CustomObtainTokenPairView(TokenObtainPairView):
+    serializer_class = TokenObtainPairViewSerializer
+
+class CustomTokenRefreshView(TokenRefreshView):
+    pass
+
+class CustomTokenVerifyView(TokenVerifyView):
+    pass
