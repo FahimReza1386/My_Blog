@@ -4,6 +4,8 @@ from django.contrib.auth import authenticate
 from ...models import User
 from django.core import exceptions
 from django.utils.translation import gettext_lazy as _
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer  # type: ignore
+
 
 class RegisterSerializer(serializers.ModelSerializer):
     password1 = serializers.CharField(max_length = 255 , write_only=True)
@@ -72,3 +74,12 @@ class ObtainAuthTokenSerializer(serializers.Serializer):
         attrs["user"]=user
         return attrs
     
+
+class TokenObtainPairViewSerializer(TokenObtainPairSerializer):
+    def validate(self , attrs):
+        validated_date = super().validate(attrs)
+        if not self.user.is_verified:
+            raise serializers.ValidationError({"detail": "user is not verified ."})
+        validated_date['email']=self.user.email
+        validated_date['user_id']=self.user.id
+        return validated_date

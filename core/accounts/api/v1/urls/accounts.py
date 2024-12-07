@@ -10,7 +10,6 @@ urlpatterns=[
     
     # Activation User Api
     
-    
     # Resent Activation
     
     # Reset Password
@@ -19,5 +18,10 @@ urlpatterns=[
     path('token/login/' , views.CustomObtainAuthToken.as_view() , name="Login-Token"),
     path('token/logout/' , views.CustomObtainDiscardAuthToken.as_view() , name="Logout-Token"),
 
+    # Login and Refresh and Verified With Jwt
+    path('jwt/login/' , views.CustomObtainTokenPairView.as_view() , name="Login-jwt"),
+    path('jwt/refresh/' , views.CustomTokenRefreshView.as_view() , name="refresh-jwt"),
+    path('jwt/verified/' , views.CustomTokenVerifyView.as_view() , name="verified-jwt"),
+    
 
 ]
