@@ -9,3 +9,4 @@ djangorestframework
 jdatetime
 jalali_core
 drf-yasg
+django-mail-templated
