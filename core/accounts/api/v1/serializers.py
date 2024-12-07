@@ -2,7 +2,7 @@ from rest_framework import serializers # type: ignore
 from django.contrib.auth.password_validation import validate_password
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate
-from ...models import User
+from ...models import User,Profile
 from django.core import exceptions
 from django.utils.translation import gettext_lazy as _
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer  # type: ignore
@@ -106,3 +106,20 @@ class ResentActivationSerializer(serializers.Serializer):
 
         attrs["user"] = user_obj
         return super().validate(attrs)
+
+
+
+
+
+
+
+
+
+# ------------------------Profile Api Serializer------------------------ #
+
+class ProfileApiSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(source="User.email" , read_only=True)
+    class Meta:
+        model=Profile
+        fields=['id',"email","first_name","last_name","image"]
+        

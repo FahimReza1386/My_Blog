@@ -139,3 +139,17 @@ class ResentAccountActivation(generics.GenericAPIView):
     def get_tokens_for_user(self, user):
         refresh = RefreshToken.for_user(user)
         return str(refresh.access_token)
+
+
+
+#  ----------------Profile Api View------------------  #
+
+
+class ProfileApi(generics.RetrieveUpdateAPIView):
+    serializer_class=ProfileApiSerializer
+    queryset=Profile.objects.all()
+
+    def get_object(self):
+        queryset=self.get_queryset()
+        obj=get_object_or_404(queryset , user=self.request.user)
+        return obj

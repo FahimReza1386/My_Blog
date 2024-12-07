@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly # type: ignore
 from rest_framework.filters import SearchFilter , OrderingFilter # type: ignore
 from rest_framework.decorators import action # type: ignore
 from rest_framework.response import Response # type: ignore
-
+from ...models import Post
 
 class BlogModelView(viewsets.ModelViewSet):
-    pass
+    model = Post
