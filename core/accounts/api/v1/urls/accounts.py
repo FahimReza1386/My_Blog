@@ -15,10 +15,9 @@ urlpatterns=[
     
     # Reset Password
     
-    # Login Token
+    # Login and Logout with Token
     path('token/login/' , views.CustomObtainAuthToken.as_view() , name="Login-Token"),
-
-    # path('token/login/' , views.CustomObtainDiscardAuthToken.as_view() , name="Logout-Token"),
+    path('token/logout/' , views.CustomObtainDiscardAuthToken.as_view() , name="Logout-Token"),
 
 
 ]

@@ -18,8 +18,8 @@ from django.urls import path , include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import permissions
-from drf_yasg.views import get_schema_view
-from drf_yasg import openapi
+from drf_yasg.views import get_schema_view # type: ignore
+from drf_yasg import openapi # type: ignore
 
 
 schema_view = get_schema_view(
