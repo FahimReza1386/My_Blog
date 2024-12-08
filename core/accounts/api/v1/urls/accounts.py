@@ -9,10 +9,9 @@ urlpatterns=[
     path("change_password/" , views.CustomChangePasswordApi.as_view() , name="ChangePasswordApi"),
     
     # Activation User Api
-    
+    path('activation/confirm/<str:token>', views.AccountActivation.as_view() , name="AccountsActivation"),
     # Resent Activation
-    
-    # Reset Password
+    path('activation/resent/', views.ResentAccountActivation.as_view() , name="AccountsActivationResent"),
     
     # Login and Logout with Token
     path('token/login/' , views.CustomObtainAuthToken.as_view() , name="Login-Token"),

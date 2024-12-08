@@ -42,7 +42,7 @@ class MyBlogs(TemplateView):
         context['posts']=post
         for post in context["posts"]:
             if post:
-                g_date = post.published_date  # تاریخ میلادی از نمونه
+                g_date = post.published_date
                 j_date = jdatetime.datetime.fromgregorian(datetime=g_date)
             else:
                 pass
