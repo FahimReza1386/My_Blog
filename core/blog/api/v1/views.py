@@ -15,12 +15,12 @@ class BlogModelView(viewsets.ModelViewSet):
     queryset=Post.objects.all()
     filter_backends=[DjangoFilterBackend, SearchFilter , OrderingFilter]
     filterset_fields={
-        "category": ["exact", "in"],
+        "category": ["exact"],
         "owner": ["exact"],
         "status": ["exact"],
     }
     search_fields=["title", "content"]
-    ordering_fields=["category"]
+    ordering_fields=["id"]
           
 
     @action(methods=["GET"], detail=False)

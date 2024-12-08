@@ -1,8 +1,6 @@
 from . import views 
 from django.urls import path,include
 
-app_name="Blog"
-
 urlpatterns =[
     path('' , views.IndexPage.as_view() , name="IndexPage"),
     path('create_post/' , views.CreatePost.as_view() , name="CreatePost"),
