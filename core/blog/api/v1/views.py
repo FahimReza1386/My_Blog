@@ -10,6 +10,8 @@ from ...models import Post
 from .serializers import *
 from .paginations import My_Paginations
 from rest_framework.pagination import PageNumberPagination
+
+
 class BlogModelView(viewsets.ModelViewSet):
     permission_classes =[IsAuthenticated]
     serializer_class = BlogModelSerializer
