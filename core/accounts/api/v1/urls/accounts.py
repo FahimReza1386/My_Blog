@@ -12,8 +12,6 @@ urlpatterns=[
     path('activation/confirm/<str:token>', views.AccountActivation.as_view() , name="AccountsActivation"),
     # Resent Activation
     path('activation/resent/', views.ResentAccountActivation.as_view() , name="AccountsActivationResent"),
-
-    # Reset Password
     
     # Login and Logout with Token
     path('token/login/' , views.CustomObtainAuthToken.as_view() , name="Login-Token"),

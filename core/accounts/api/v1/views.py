@@ -13,7 +13,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework_simplejwt.tokens import RefreshToken  # type: ignore
 from django.conf import settings
 from jwt.exceptions import ExpiredSignatureError, InvalidSignatureError  # type: ignore
-import jwt
+import jwt # type: ignore
 from .utils import EmailThread
 
 
