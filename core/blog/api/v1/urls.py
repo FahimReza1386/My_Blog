@@ -7,5 +7,6 @@ app_name = 'api-v1'
 
 router = DefaultRouter()
 router.register('Blog' , views.BlogModelView , basename='Blogs')
+router.register('Category' , views.CategoryModelView , basename='Categories')
 
 urlpatterns = router.urls
