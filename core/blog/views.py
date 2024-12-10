@@ -32,7 +32,7 @@ class IndexPage(TemplateView):
         context['post_published_date']=formatted_date
         return context
     
-class MyBlogs(TemplateView):
+class MyBlogs(LoginRequiredMixin, TemplateView):
     template_name='Blog/My_Blogs.html'
 
     def get_context_data(self, **kwargs):
@@ -42,7 +42,7 @@ class MyBlogs(TemplateView):
         context['posts']=post
         for post in context["posts"]:
             if post:
-                g_date = post.published_date  # تاریخ میلادی از نمونه
+                g_date = post.published_date
                 j_date = jdatetime.datetime.fromgregorian(datetime=g_date)
             else:
                 pass
@@ -105,7 +105,10 @@ class DetailsPost(DetailView):
                 pass
             formatted_date2 = f"{l_date.year}/{l_date.month}/{l_date.day}"
             context['comment_created_date']=formatted_date2
-        context['prf']=get_object_or_404(Profile ,user=request.user)
+        if request.user.is_authenticated:
+            context['prf']=get_object_or_404(Profile ,user=request.user)
+        else:
+            context["prf"]=None
         return self.render_to_response(context)
     
     

@@ -8,8 +8,8 @@ from comment.models import Comment_Like, Comments
 
 class AdminCustom(UserAdmin):
     model = User
-    list_display = ("email","is_superuser","is_active","is_staff")
-    list_filter = ("email" , "is_superuser" , "is_active",)
+    list_display = ("email","is_superuser","is_active","is_staff","is_verified")
+    list_filter = ("email" , "is_superuser" , "is_active","is_verified")
     search_fields = ("email",)
     ordering = ("email",)
     fieldsets = (
@@ -27,7 +27,8 @@ class AdminCustom(UserAdmin):
                 "fields":(
                     "is_staff",
                     "is_superuser",
-                    "is_active"
+                    "is_active",
+                    "is_verified",
                 ),
             },
         ),
@@ -56,6 +57,7 @@ class AdminCustom(UserAdmin):
                     "is_staff",
                     "is_active",
                     "is_superuser",
+                    "is_verified"
                 ),
             },
         ),
