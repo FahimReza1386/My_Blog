@@ -43,7 +43,7 @@ class TestBlogView(TestCase):
     def test_blog_post_create_post(self):
         self.client.force_login(self.user)
         url = reverse("CreatePost")
-        response=self.client.get(url)
+        response=self.client.get(url)   
         post=self.post
         post.save()
         self.assertEquals(response.status_code , 200)
