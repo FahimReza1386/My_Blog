@@ -1,6 +1,4 @@
-from django.test import TestCase, Client
 from accounts.models import User, Profile
-from comment.models import Comment_Like, Comments
 from blog.models import Post, Category
 from rest_framework.test import APIClient
 from django.urls import reverse
