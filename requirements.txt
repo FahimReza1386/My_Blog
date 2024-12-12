@@ -12,3 +12,5 @@ drf-yasg
 django-mail-templated
 django-filter
 markdown
+pytest
+pytest-django

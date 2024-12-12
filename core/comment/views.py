@@ -60,7 +60,7 @@ class AddComment(View):
         
 
 class DeleteComment(View):
-    def get(self , request , *args , **kwargs):
+    def delete(self , request , *args , **kwargs):
         if request.user.is_authenticated:
             comment = get_object_or_404(Comments , id=kwargs['pk'])
             comment.delete()

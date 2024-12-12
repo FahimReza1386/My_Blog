@@ -24,4 +24,6 @@ class CommentApiView(viewsets.ModelViewSet):
     search_fields=["text"]
     ordering_fields=["star"]
 
+    http_method_names = ['get', 'post' , "delete"]
+
     
