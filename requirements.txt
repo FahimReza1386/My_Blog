@@ -15,5 +15,9 @@ markdown
 pytest
 pytest-django
 
+<<<<<<< HEAD
 facker
 requests
+=======
+facker
+>>>>>>> 31fc3ef (Create The Faker Data For Post)
