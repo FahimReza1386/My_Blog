@@ -3,6 +3,7 @@ from django.urls import path,include
 
 urlpatterns =[
     path('' , views.IndexPage.as_view() , name="IndexPage"),
+    path('view_api/' , views.PostViewApi.as_view() , name="PostViewApi"),
     path('create_post/' , views.CreatePost.as_view() , name="CreatePost"),
     path('delete_post/<int:pk>/' , views.DeletePost.as_view() , name="DeletePost"),
     path('edit_post/<int:pk>/' , views.EditPost.as_view() , name="EditPost"),

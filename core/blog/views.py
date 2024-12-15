@@ -32,6 +32,10 @@ class IndexPage(TemplateView):
         context['post_published_date']=formatted_date
         return context
     
+
+class PostViewApi(TemplateView):
+    template_name = "Blog/api2.html"
+    
 class MyBlogs(LoginRequiredMixin, TemplateView):
     template_name='Blog/My_Blogs.html'
 

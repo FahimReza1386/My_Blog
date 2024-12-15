@@ -14,15 +14,6 @@ django-filter
 markdown
 pytest
 pytest-django
-
-<<<<<<< HEAD
-<<<<<<< HEAD
 facker
 requests
-=======
-facker
->>>>>>> 31fc3ef (Create The Faker Data For Post)
-=======
-facker
-requests
->>>>>>> bf835fe (Create The Send Comment and Create Image in Send Data and Send Comment)
+django-cors-headers

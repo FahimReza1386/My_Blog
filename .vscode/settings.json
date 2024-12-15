@@ -6,6 +6,7 @@
     },
     "cSpell.words": [
         "authtoken",
+        "corsheaders",
         "djangorestframework",
         "filterset",
         "fromgregorian",

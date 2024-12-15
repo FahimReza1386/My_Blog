@@ -17,7 +17,7 @@ class BlogModelView(viewsets.ModelViewSet):
     serializer_class = BlogModelSerializer
     queryset=Post.objects.all()
     filter_backends=[DjangoFilterBackend, SearchFilter , OrderingFilter]
-    # pagination_class=My_Paginations
+    pagination_class=My_Paginations
     filterset_fields={
         "category": ["exact"],
         "owner": ["exact"],

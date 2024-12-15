@@ -18,6 +18,6 @@ class My_Paginations(PageNumberPagination):
                 },
                 "Posts_Count": self.page.paginator.count,
                 "Total_Pages": self.page.paginator.num_pages,
-                "The_Posts_Information": data,
+                "results": data,
             }
         )
