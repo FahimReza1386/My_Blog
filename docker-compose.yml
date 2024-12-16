@@ -1,4 +1,12 @@
 services:
+  redis:
+    container_name: redis3
+    image: redis
+    ports:
+      - "6379:6379"
+
+    command: redis-server --save 60 1 --loglevel warning
+
   backend:
     build: .
     container_name: Maktab
@@ -23,7 +31,23 @@ services:
     environment:
       - ServerOptions__HostName=smtp4dev
 
+   
+  master:
+    image: locustio/locust
+    ports:
+      - "8089:8089"
+    volumes:
+      - ./core/locust:/mnt/locust
 
+    command: -f /mnt/locust/locustfile.py --master -H http://Maktab:8000  
+
+
+  worker:
+    image: locustio/locust
+    volumes:
+      - ./core/locust:/mnt/locust
+
+    command: -f /mnt/locust/locustfile.py --worker --master-host master
 
 volumes:
   smtp4dev-data:
