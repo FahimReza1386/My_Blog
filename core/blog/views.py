@@ -34,7 +34,7 @@ class IndexPage(TemplateView):
     
 
 class PostViewApi(TemplateView):
-    template_name = "Blog/api2.html"
+    template_name = "Blog/Api_Template.html"
     
 class MyBlogs(LoginRequiredMixin, TemplateView):
     template_name='Blog/My_Blogs.html'

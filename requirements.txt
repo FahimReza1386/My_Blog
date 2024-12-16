@@ -14,6 +14,7 @@ django-filter
 markdown
 pytest
 pytest-django
-facker
+faker
 requests
 django-cors-headers
+locust
