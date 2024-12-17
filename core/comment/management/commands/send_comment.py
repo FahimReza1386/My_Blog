@@ -5,6 +5,8 @@ from accounts.models import User, Profile
 from blog.models import Post, Category
 from comment.models import Comments, Comment_Like
 from datetime import datetime
+from PIL import Image
+from io import BytesIO
 import random
 import requests
 
@@ -19,14 +21,21 @@ class Command(BaseCommand):
         user.save()
 
         image_url = f'https://picsum.photos/200/200?random={random.randint(1, 1000)}'
-
         response = requests.get(image_url)
-        image_name = f'{self.faker.uuid4()}.jpg'
+
+        image= Image.open(BytesIO(response.content))
+
+        image_size = len(response.content)
+
+        if image_size > 1048576:
+            image = self.resize_image(image)
+        
+        image_file= self.save_image(image)
 
         prf = Profile.objects.get(user=user)
         prf.first_name=self.faker.first_name()
         prf.last_name=self.faker.last_name()
-        prf.image=ContentFile(response.content, image_name)
+        prf.image=image_file
         prf.description=self.faker.paragraph(nb_sentences=3)
         prf.save()
 
@@ -40,3 +49,14 @@ class Command(BaseCommand):
                 post=random.choice(ss),
                 star=random.choice([1,2,3,4,5])
             )
+
+
+    def resize_image(self , image):
+        image = image.resize((800,800) , Image.ANTIALIAS)
+        return image
+
+    def save_image(self , image):
+        img_io = BytesIO()
+        image.save(img_io, format="JPEG" , quality=85)
+        img_io.seek(0)
+        return ContentFile(img_io.read(), name="image.jpg")
