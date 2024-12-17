@@ -187,3 +187,12 @@ EMAIL_USE_TLS = False
 # ]
 
 CORS_ALLOW_ALL_ORIGINS=True
+
+
+# Celery Configs
+CELERY_BROKER_URL = "redis://redis3:6379/1"
+
+CELERY_BEAT_SCHEDULE= {
+    "send_emails":{"task":"accounts.tasks.send_email" , "schedule":10},
+    "get_posts":{"task":"accounts.tasks.get_posts" , "schedule":5},
+}

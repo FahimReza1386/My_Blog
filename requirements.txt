@@ -18,3 +18,9 @@ faker
 requests
 django-cors-headers
 locust
+
+
+# Background Process and Cache
+
+celery
+redis
