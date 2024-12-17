@@ -1,6 +1,6 @@
-from django.urls import path , include
+from django.urls import path, include
 
 urlpatterns = [
-    path("" , include("accounts.urls.accounts")),
+    path("", include("accounts.urls.accounts")),
     # path("profile/" , include("accounts.urls.profile")),
 ]

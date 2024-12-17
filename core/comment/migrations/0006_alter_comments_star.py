@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('comment', '0005_alter_comment_like_comment'),
+        ("comment", "0005_alter_comment_like_comment"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='comments',
-            name='star',
+            model_name="comments",
+            name="star",
             field=models.IntegerField(default=1),
         ),
     ]

@@ -11,20 +11,23 @@ import requests
 
 category_name = ["سیاسی", "محلی", "اخبار", "حوادث"]
 
+
 class Command(BaseCommand):
 
     help = "inserting dummy data."
 
-    def __init__(self, *args , **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.faker = Faker()
 
     def handle(self, *args, **options):
-        user = User.objects.create_user(email=self.faker.email(), password=self.faker.password())
+        user = User.objects.create_user(
+            email=self.faker.email(), password=self.faker.password()
+        )
         user.is_verified = True
         user.save()
 
-        image_url = f'https://picsum.photos/200/200?random={random.randint(1, 1000)}'
+        image_url = f"https://picsum.photos/200/200?random={random.randint(1, 1000)}"
         response = requests.get(image_url)
 
         image = Image.open(BytesIO(response.content))
@@ -33,7 +36,7 @@ class Command(BaseCommand):
 
         if image_size > 1048576:  # 1MB
             image = self.resize_image(image)
-        
+
         image_file = self.save_image(image)
 
         prf = Profile.objects.create(user=user)
@@ -58,11 +61,11 @@ class Command(BaseCommand):
             )
 
     def resize_image(self, image):
-        image = image.resize((800, 800), Image.ANTIALIAS) 
+        image = image.resize((800, 800), Image.ANTIALIAS)
         return image
 
     def save_image(self, image):
         img_io = BytesIO()
-        image.save(img_io, format='JPEG', quality=85)
+        image.save(img_io, format="JPEG", quality=85)
         img_io.seek(0)
-        return ContentFile(img_io.read(), name='image.jpg')
+        return ContentFile(img_io.read(), name="image.jpg")

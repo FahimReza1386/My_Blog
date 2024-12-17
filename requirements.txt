@@ -2,23 +2,38 @@
 django >3.2,<3.3
 python-decouple
 pillow
-djangorestframework-simplejwt
 djangorestframework
 
+# Deplyment Module
 gunicorn
+
 # Date Time Module
 jdatetime
 jalali_core
+
+# third party modules
 drf-yasg
-django-mail-templated
+djangorestframework-simplejwt
 django-filter
 markdown
+
+
+# Email Third Party Modules
+django-mail-templated
+django-cors-headers
+
+# Refactoring
+flake8
+black
+
 pytest
 pytest-django
-faker
+
+# Faker Data
+Faker
+
+# Request Modules
 requests
-django-cors-headers
-locust
 
 
 # Background Process and Cache

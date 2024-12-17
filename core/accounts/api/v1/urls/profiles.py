@@ -1,7 +1,7 @@
-from django.urls import path, include
+from django.urls import path
 from .. import views
 
 
-urlpatterns =[ 
-    path('' , views.ProfileApi.as_view() , name="ProfileApi"),
+urlpatterns = [
+    path("", views.ProfileApi.as_view(), name="ProfileApi"),
 ]

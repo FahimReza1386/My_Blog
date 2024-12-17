@@ -1,30 +1,32 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User , Profile
+from .models import User, Profile
 from blog.models import Post, Category
 from comment.models import Comment_Like, Comments
+
 # Register your models here.
 
 
 class AdminCustom(UserAdmin):
     model = User
-    list_display = ("email","is_superuser","is_active","is_staff","is_verified")
-    list_filter = ("email" , "is_superuser" , "is_active","is_verified")
+    list_display = ("email", "is_superuser", "is_active", "is_staff", "is_verified")
+    list_filter = ("email", "is_superuser", "is_active", "is_verified")
     search_fields = ("email",)
     ordering = ("email",)
     fieldsets = (
         (
-            "Authenticated",{
-                "fields":
-                (
+            "Authenticated",
+            {
+                "fields": (
                     "email",
                     "password",
                 ),
             },
         ),
         (
-            "Permissions",{
-                "fields":(
+            "Permissions",
+            {
+                "fields": (
                     "is_staff",
                     "is_superuser",
                     "is_active",
@@ -57,7 +59,7 @@ class AdminCustom(UserAdmin):
                     "is_staff",
                     "is_active",
                     "is_superuser",
-                    "is_verified"
+                    "is_verified",
                 ),
             },
         ),
