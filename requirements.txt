@@ -5,6 +5,7 @@ pillow
 djangorestframework-simplejwt
 djangorestframework
 
+gunicorn
 # Date Time Module
 jdatetime
 jalali_core

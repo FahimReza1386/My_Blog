@@ -151,7 +151,7 @@
                 }
 
                 // Load categories
-                $.get('http://127.0.0.1:8000/api/v1/Category/', function (data) {
+                $.get('http://127.0.0.1:80/api/v1/Category/', function (data) {
                     allCats.empty();
                     for (let cat of data.results) {
                         let category = `
@@ -165,9 +165,9 @@
                 $('#button-search').click(function () {
                     let query = searchQuery.val();
                     if (query) {
-                        loadPosts(`http://127.0.0.1:8000/api/v1/Blog/?search=${query}`);
+                        loadPosts(`http://127.0.0.1:80/api/v1/Blog/?search=${query}`);
                     } else {
-                        loadPosts('http://127.0.0.1:8000/api/v1/Blog/');
+                        loadPosts('http://127.0.0.1:80/api/v1/Blog/');
                     }
                 });
                
@@ -178,14 +178,14 @@
                 $(document).on("click", ".button-previous", function () {
                     if (currentPage > 1) {
                         currentPage--;
-                        loadPosts(`http://127.0.0.1:8000/api/v1/Blog/?page=${currentPage}`);
+                        loadPosts(`http://127.0.0.1:80/api/v1/Blog/?page=${currentPage}`);
                     }
                 });
 
                 // Handle next page click
                 $(document).on("click", ".button-next", function () {
                     currentPage++;
-                    loadPosts(`http://127.0.0.1:8000/api/v1/Blog/?page=${currentPage}`);
+                    loadPosts(`http://127.0.0.1:80/api/v1/Blog/?page=${currentPage}`);
                 });
 
 
@@ -193,11 +193,11 @@
                 $(document).on('click', '.category-filter', function (e) {
                     e.preventDefault();
                     let categoryId = $(this).data('category-id');
-                    loadPosts(`http://127.0.0.1:8000/api/v1/Blog/?category=${categoryId}`);
+                    loadPosts(`http://127.0.0.1:80/api/v1/Blog/?category=${categoryId}`);
                 });
 
                 // Initial load of posts
-                loadPosts('http://127.0.0.1:8000/api/v1/Blog/');
+                loadPosts('http://127.0.0.1:80/api/v1/Blog/');
             });
         </script>
     </body>
