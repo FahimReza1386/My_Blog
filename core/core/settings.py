@@ -196,3 +196,15 @@ CELERY_BEAT_SCHEDULE= {
     "send_emails":{"task":"accounts.tasks.send_email" , "schedule":10},
     "get_posts":{"task":"accounts.tasks.get_posts" , "schedule":5},
 }
+
+
+# Caching Configuration
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis3:6379/2",
+        "OPTIONS":{
+            "CLIENT_CLASS":"django_redis.client.DefaultClient",
+        }
+    }
+}
