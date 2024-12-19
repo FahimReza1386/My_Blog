@@ -21,7 +21,7 @@ password: a/@1234567
 4- LoadTesting (Locust) /
 5- Docker /
 6- Document with Swagger and Redoc /
-7- Background-Process with Django-Redis /
+7- Background-Procesing /
 8- Caching /
 9- Faker /
 10- Authentication Api with Login With Token and jwt /
@@ -32,3 +32,4 @@ password: a/@1234567
 15- Flake8 and Black library /
 16- Send Email With Threading /
 17- DefaultRouter /
+18- Celery /
