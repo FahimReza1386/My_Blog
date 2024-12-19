@@ -27,7 +27,9 @@ jobs:
 
   Deploy:
 
+    if : ${{ always() &&  contains(join(needs.*.result, ','), 'success') }}
     name: Deploy
+    needs: Test
     runs-on: ubunto-latest
 
     steps:
