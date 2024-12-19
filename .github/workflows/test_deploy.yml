@@ -1,4 +1,4 @@
-name: Setup Docker-Compose 
+name: Setup Docker-Compose and Test and Deploy
 
 on:
   push:
@@ -8,7 +8,9 @@ on:
 
 jobs:
 
-  build:
+  Test:
+
+    name: Test
 
     runs-on: ubuntu-latest
 
@@ -22,3 +24,19 @@ jobs:
       run: docker-compose -f docker-compose-stage.yml up --build -d
     - name: Run Test
       run: docker-compose exec backend sh -c "flake8 && pytest"
+
+  Deploy:
+
+    name: Deploy
+    runs-on: ubunto-latest
+
+    steps:
+    - uses: action/checkout@v4
+    - name: Connect and Execute Command
+      uses : appleboy/ssh-action@main
+      with:
+        username: {{ secrets.USERNAME }}
+        password: {{ secrets.PASSWORD }} 
+        host: {{ secrets.HOST }}
+        port: {{ secrets.PORT }}
+        script: ls
