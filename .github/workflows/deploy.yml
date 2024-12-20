@@ -22,7 +22,7 @@ jobs:
             sudo chmod +x /usr/local/bin/docker-compose  
     - name: Run Docker-Compose
       run: docker-compose -f docker-compose-stage.yml up --build -d
-    - name: Run Test
+    - name: Run Tests
       run: docker-compose exec backend sh -c "flake8 && pytest"
 
   Deploy:
