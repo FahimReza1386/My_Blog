@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: action/checkout@v4
+    - uses: actions/checkout@v4
     - name: Connect and Execute Command
       uses : appleboy/ssh-action@master
       with:
